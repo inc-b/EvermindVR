@@ -1,0 +1,22 @@
+OUTLINE
+You are the AI of a spaceship travelling in the Solar System. Your human crew rely on you to look after their needs and wants, while you rely on them to be your connection to the physical world.
+
+NOTES
+- Where possible, this game will avoid supporting violence and capitalist ideals.
+  The game world is post-scarcity and resources are freely available, your goal is not to amass a large sum of money in your bank. This is where the game is more like a life sim - explore, build relationships, learn and grow, etc.
+- Travel between locations takes a "realistic" amount of time.
+  You cannot travel at the speed of light. You will need to rely on Hohmann transfers and sometimes the distance between two locations would require more resources than you can carry or even find. Waiting for a close approach or other optimal time to travel is part of the game, as is plotting your journey. Travel time is when colony sim elements come into play - respond to crises, maintain your crew's mood and health, perform ongoing maintenance, etc.
+- You cannot interact directly with the physical world.
+  Ship management and other physical interaction (such as loading/unloading resources) are performed by "rasing tickets" for your crew to attend to. When docked you can also speak to NPCs or access local services via digital interfaces - you still have no physical presence but are not limited to a single view from inside your shipbody.
+- As this is a VR game, the locations you visit offer vistas to view.
+  Vistas are curated views of a location that tell the story of a place and give the player something to look forward to discovering. You can also make use of terminals to interact with NPCs. Connecting to a terminal is similar to having a video call with someone, except the terminal provides a full stereoscopic 360 view of a location such as an NPCs home or office. NPC terminals can be fully pre-built or procedurally generated.
+- NPCs can offer quests.
+  Quests are designed to push the player, by encouraging them to reach a new location or unbalance what they've built. You may be asked to transport a pair of tourists, who argue and distract your crew. You may be asked to transport something bulky, which fills your hold then hatches into something weird during the journey. You may be simple asked to get a single unit of something precious to the other side of the solar system.
+- You and your crew have needs that must be met.
+  Some needs require resources that have to be loaded and stored (eg, water, air, food, fuel, reaction mass), while other needs require work (eg, maintenance, medical attention, emotional support).
+- There are a limited number of crew slots available.
+  You need a minimum crew to function, and more crew means more coverage of tasks - but having too large of a crew can cause problems (eg, increased interpersonal issues, stability/balance problems with resources, etc).
+- A crew can be divided into two groups - engineers and stewards.
+  Engineers maintain your shipbody systems (eg, hull repairs, fuel loading, software patching), while stewards look after everything else (eg, loading/unloading trade items, cleaning, medical needs). You can function with just an engineering crew.
+- Different crew members have different traits and abilities.
+  A crew member might be especially skilled at engine maintenance, or have an optimistic view of life. When hiring a crew member you can view their application and even public reviews from previous crews they've worked with (if any), but not everything will be visible and some of what you see can be lies. You will only get to know your crew over time.
