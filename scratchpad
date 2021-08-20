@@ -1,0 +1,124 @@
+This file is where any brainstorming will go. It isn't organised and isn't a source of truth.
+
+OUTLINE
+You are a ship AI travelling the solar system. You can transport cargo or just explore. There are various NPCs you can meet in each location who will provide quests, tasks, stories, etc.
+
+---
+Running "costs" and crew roles
+Simply travelling from port to port requires supplies and adds wear to various systems. Crew members and resources are needed to balance these "costs". Random events can cause sudden changes. Events are calculated at the start of each day but take effect at a random point during the 24 hour period. 
+- Engineering crew. Focus on systems and ship health. The shipbody's engine takes small amounts of random damage over time and loses efficiency. The shipbody itself also takes damage, but this tends to be linear with travel time. Electrical systems tend to fail/degrade suddenly rather than take ongoing damage - an electrical system that has over 90% damage will be entirely offline.
+	- Engine: 25% chance of 5% damage every day of travel
+	- Shipbody: 3% damage every day of travel
+	- Electrical - Heating: 5% chance of 50% damage every day of travel
+	- Electrical - Life Support: 1% chance of 25% damage every day of travel
+	- Electrical - Lighting: 1% chance of 100% damage every day of travel
+- Steward crew. Focus on crew and mood. Food is used up faster by more crew, running out of food means rationing. Crew also get injured at times. Mess gathers and affects crew mood.
+	- Food: Food reserves drop by 1 unit per day per crew member. If food reserves drop below 1 per crew per day remaining in journey then food drop is reduced to .1 per day
+	- Health: 10% chance of minor injury, causing 10% damage to single crew member. If a crew member's health is below 10% at the next dock they will leave the crew.
+	- Cleanliness: Increase filth by 5% every day. Each 10% increase in mess causes a 5% drop in mood for all crew (eg, 98% filth causes a 49% mood drop)
+
+Mood Effects
+Systems can affect crew mood based on current status.
+- Electrical - heating: 10% mood damage while offline
+- Electrical - lighting: 10% mood damage while offline
+- Electrical - life support: 25% mood damage while offline
+- Food:  25% mood damage if food is below 1 unit per crew member per day remaining in journey
+- Health: 10% mood damage if health is below 50%
+- Cleanliness: Mood drop of quarter of filth percentage, with rounding (eg, 98% filth causes 25% mood drop)
+
+Random events
+Random events cause medium changes to each system/service occasionally
+- Engine: 1% chance of 10% damage per day
+- Shipbody: 1% chance of 10% damage per day
+- Electrical: 1% chance of a discrete system degrading (50% damage - 85% chance) or failing (100% damage - 15% chance) per day
+- Food: 1% chance of food poisoning per day (10% damage to mood and health to a random number of crew members)
+- Health: 1% chance of a random medical event per day that causes 25% damage to a random number of crew members
+- Cleanliness: 1% chance of random spill per day that causes 25% increase to filth
+
+Choice Events
+Choice events are special events where you get to choose to activate them or not. Each choice event has a random chance of failure or success and the gains/losses are much larger.
+- Engine: 50% chance of permanent increase engine performance by 5%, failure means 50% damage to engine
+- Shipbody:  10% chance of permanent increase to shipbody strength of 10%, failure means 25% damage to hull
+- Electrical: 5% chance of preventing the next failure event, failure means 25% damage to system
+- Food: 50% chance of 25% mood boost to all crew, failure means losing 
+
+Work tasks
+Things that crew members do either during travel or when docked. Each hour worked reduces a crew members mood by 5%. If a crew member's mood is below 50% they won't work unless an emergency is declared. Some tasks can only be done at certain times (eg, cooking).
+- Travel tasks:
+	- Engine repairs: Repair 1% of engine damage per hour worked.
+	- Hull repairs: Repair 1% of hull damage per hour worked
+	- Electrical repairs: Repair 10% of damage to an electrical system per hour worked
+	- Cleaning: Reduce filth by 2% every hour worked
+	- Medical: Heal all crew members 2% per hour worked
+	- Cooking: Only possible during breakfast, lunch, and dinner - one hour each. Increase all crew members mood by 2% per hour
+- Docked tasks:
+	- Load: Add 5 units of a resource per hour
+	- Unload: Remove 5 units of cargo per hour
+	- Cleaning: Reduce filth by 5% every hour
+
+Loading/Unloading
+ Loading and unloading resources takes time - each port has effects on the crew, the longer you are in a particular port the stronger the effects (eg, leisure port - crew mood increases but random chance of crew member leaving, crappy port - crew mood decreases but random chance of a crew member joining). Having more stewarding staff increases load/unload speed and gives a bonus to resource quality (better handling, better knowledge of products, etc). Food, fuel, and remass all dwindle during travel and need to be restocked by the steward as well (more crew means food dwindles faster) - these take up inventory space and have to be loaded first. 
+
+Crew
+Each crew member has set work they can perform for ship upkeep. However, they also interact with each other as time passes. Interactions can apply mood buffs/debuffs, cause ongoing positive/negative emotions towards another crew member, etc. Each crew member has certain values (eg, shy vs outgoing) that affect how they feel about other crew members and the outcomes of different interactions. Crew members will also be affected by the status of other crew members (eg, if a crew member is very unhealthy other crew members may worry or feel happy about their own health, if a crew member performs less work then they may develop negative feelings towards that crew member or get a mood bonus for feeling superior)
+
+Crew data
+Each crew member has a set of values that affect their needs and production.
+- Outgoing vs Reserved: Used in calculations of social crowding/loneliness
+- Detail Oriented vs People Oriented: Used in calculations of work productivity and social productivity (ie, how much do they improve the mood of the ship)
+- Preferred work: The crew member has a +50% bonus when doing this kind of work
+- Hated work: The crew member has a -50% bonus when doing this kind of work
+- Immunity: A mood issue that doesn't affect the crew member (eg, cleanliness, injury, etc)
+
+Crew slots
+Your ship has a limited number of slots for crew members, you need to fill these slots wisely (and even leave a few slots empty for emergencies). Each crew slot has work associated with it. Some slots can perform multiple tasks (and are best used when you don't have many crew members).
+- Engineer: Engine repairs, hull repairs, electrical repairs
+- Mechanic: Engine repairs
+- Electrician: Electrical repairs
+- Cook: Cooking
+- Steward: Cooking, medical, cleaning, loading/unloading
+- Janitor: Cleaning
+- Labourer: Loading/unloading, cleaning
+- Medic: Medical
+- Life support specialist: Electrical repairs, but only works on life support
+
+How is the game data structured?
+Start with major locations, very basic (minor locations/character houses/etc can all come later). Each location has a vista that you view, and a POV from your shipbody (allows for day/night, etc)
+No matter the location there have to be certain menu elements:
+- Pause/return to the game menu (where graphics and gameplay options can be tweaked)
+- Open the market (where you can load and unload resources - no cost, this isn't about capitalism. Maybe some docks do have costs? You can pick up products in free commerce docks and sell them at capitalist docks - there's no penalty for this, but no gain either other than increasing your bank so you can buy more products that are free in other places)
+- Open the navigation map (where you can plot a travel route and confirm launch)
+- A phone book (where you can contact locals - this is where the procedural locations would be used but for now a video or image feed is fine)
+- A quest log (see what you need to do and where. Eg, speak to fred at lunar station 1, deliver 50 ice to Broad STation)
+- Check your status (hold space, repairs needed, etc)
+Menu navigation doesn't need to use the VR space of the wands, just gamepad style navigation is fine (no Minority Effect RSI and increases portability)
+A location has:
+- A vista (a curated scene with a placed camera - build these after the market)
+- A viewpoint (a view from where your ship will sit - build these first. Most will just be a point in orbit around a moon or planet, with your shipbody in view)
+- A list of exports (probably only 3)
+- A list of imports (again, 3 is good)
+- A phone book (ie, a list of npcs you can call - this can be populated after the vista)
+
+---
+
+NOTES
+
+Make evermind a VR game - you are a ship AI and have to plot routes around the solar system. Movement between bodies can be accelerated (like space engine)
+
+When accelerating you can watch the human crew in fast forward and keep an eye on the news as it flicks past. 
+
+One aspect of the game is plotting your journey in a simplified model of the solar system. You choose each leg of the journey (accounting for ship speed and fuel tank) to reach a destination.
+
+In each destination you and your crew can perform tasks.
+
+Important destinations have local terminals you can connect to once in orbit. Local terminals are procedurally generated rooms you can view based on the location (location, and purpose are used to select room shape, parts, and background, the terminal is placed in selected positions built into the room shape. NPCs are placed using the same method).
+
+Major locations also have public terminals - these are crafted vistas where you can meet new people, explore the lore of a place, find work, shop, etc.
+
+Ship functions have to be maintained (fuel, remass, power, etc) and crew needs have to be met. Crew also have personalities that can cause issues. You can choose how to manage your ship, within the confines of the law. You have various ways to deal with interpersonal problems and each will have an effect on the crew involved. Look back in my notes for the "spoons" social management card game for ideas ("Spatial Relations").
+
+What's the goal? The player needs a reason to keep travelling and trading (eg, tracking down Ruthless in Rebel Galaxy Outlaw, building a ship in Rimworld). What is the message of the game? What's important about the mechanics in terms of our lives today? The game world is post scarcity so there's no need for commerce but still a need for transporting goods. Classic AI story - what does it mean to be alive? Is there a point to be made about mindlessly trading where you have to create your own purpose? How would that best be communicated? Story bites that hint to the player that there's a greater meaning to what they're doing? The payoff would have to be worthwhile or they'll feel cheated. Maybe a bit too pretentious, can it be livened up? Made more relevant and digestible. The Bartle taxonomy player types: achievers, explorers, socialisers, and killers. 
+
+Rather than colony management (losing and gaining crewmembers is a little weird), just use the travel and trade base to tell stories in - a VR visual novel. Good idea, but the colony management stuff was to pass time while travelling between locations. I'd rather keep that in than just skip over it, is there any way to simplify? I'd rather not have a set crew (like Mass Effect) because it would mean specifically writing all stories around them. Procedurally generated crew members give more replayability. Maybe something inbetween like Animal Crossing? The game is more of a life sim than a colony sim anyway. How would that work? A two axis character personality generator would work (eg, outgoing vs reserved & detail oriented vs people oriented) where characters are at different points on each scale. The closer two characters are on the chart, the better they get along. Each axis also has unique emotional events that occur at random, and the severity of events is affected by the character's position on the relevant axis. Maybe you can take actions to prevent these events? If a character's mood drops too low then they have a chance to leave at the next port. Each port has a limited number of characters willing to join (or maybe none) and each character plays a role in keeping the colony running well. What crew does an AI ship need? Based on the maritime standard you need deck crew (ie, the bridge), engineering crew, and steward's crew (ie, cooking, cleaning, and logisitics), and others (eg, medic). The AI (ie, you) is the captain and can be the entire deck crew. You'll need a mechanical engineer (for engine repairs) and an electrical engineer at a minimum for the engineering crew. The steward's crew needs a steward (in charge of cleaning, loading/unloading, etc), a cook, and a medic. One person can fill multiple roles (even all roles) but they have limited time and energy to complete the work required. The ship has limited living space but the closer you get to a full complement the harder it will be to manage social needs. Sometimes you'll also need to transport passengers so it's a good idea to have a guest room empty.
+
+
